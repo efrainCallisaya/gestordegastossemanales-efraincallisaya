@@ -1,15 +1,14 @@
 
-import NavBar from './components/Navbar/NavBar'
-import ItemListContainerI from './components/ItemListContainer/ItemsListComponentI'
+import NavBar from './components/NavBar.js'
+import ItemListContainer from './components/ItemsListComponent.js'
  function App() {
   return (
-        <>
-        <NavBar/>
-        <ItemListContainerI componentesI="hola Ejercicio"/>
-        </>
-
+        <div>
+            <NavBar/>
+            <ItemListContainer  componentesI="Saludo"/>
+        </div>
   )
-} 
+}
 // end App
 
-export default App
+export default App 
