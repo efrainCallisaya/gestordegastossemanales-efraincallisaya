@@ -1,4 +1,4 @@
-
+import {CardWidget} from './CardWidget';
 
 export default function NavBar() {
   return (
@@ -17,11 +17,7 @@ export default function NavBar() {
         <a href="./pages/comprasInvierno.html">
             <button type="button" className="btn btn-outline-primary py-1 border-0">Invierno</button>
         </a>
-            <button className="btn btn-outline-dark me-5" type="submit">
-            <i className="bi-cart-fill me-1"></i>
-            carrito
-            <span className="badge bg-dark text-white ms-1 rounded-pill">1</span>
-            </button>
+            <CardWidget/>
             <a className="btn btn-primary me-5" href="" >inicio</a>
             <a className="btn btn-success me-5" href="" >registrate</a>
     </div>
