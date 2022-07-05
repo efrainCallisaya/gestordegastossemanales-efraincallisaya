@@ -4,6 +4,7 @@ const useCount = (stock,inicial)=>{
 
     const funcionlogica = (valor)=>{
       const result = contador + valor;
+      
       if( valor === 0 ){
         setContador(0)
 

@@ -14,7 +14,7 @@ import useCount from './useCount'
             </div>
             <button type="" className="btn btn-success mt-5 ms-5" onClick={()=>funcionlogica(0)}>Comprar</button>
           </section>
-          </div> 
+        </div> 
     )
   }
 export default ComponenetesII;

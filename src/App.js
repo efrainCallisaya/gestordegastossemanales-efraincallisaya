@@ -1,11 +1,13 @@
 
 import NavBar from './components/NavBar'
 import ItemListContainer from './components/ItemsListComponent'
- function App() {
+import ItemDetailContainer from './components/ItemDetailContainer'
+function App() {
   return (
         <div>
             <NavBar/>
             <ItemListContainer  componentesI="Saludo"/>
+            <ItemDetailContainer/>
         </div>
   )
 }
