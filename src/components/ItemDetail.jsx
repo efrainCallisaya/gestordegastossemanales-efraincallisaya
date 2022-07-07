@@ -7,8 +7,7 @@ export const ItemDetail = ({ name, price, pictureURL, id, description }) => {
             <div className="row">
               <div className="col-md-6">
                 <div className="text-center p-4">
-                  {" "}
-                  <img id="main-image" src={pictureURL} width="100%" />{" "}
+                  <img id="main-image" src={pictureURL} width="100%" />
                 </div>
               </div>
               <div className="col-md-6">
@@ -17,7 +16,6 @@ export const ItemDetail = ({ name, price, pictureURL, id, description }) => {
                     {name}
                   </h5>
                   <div className="price d-flex flex-row align-items-center">
-                    {" "}
                     <span className="act-price">${price}</span>
                   </div>
                 </div>
@@ -26,8 +24,8 @@ export const ItemDetail = ({ name, price, pictureURL, id, description }) => {
                   <button className="btn btn-primary text-uppercase mr-2 px-4 mb-3">
                     Detalle
                   </button>
-                  <i className="fa fa-heart text-muted"></i>{" "}
-                  <i className="fa fa-share-alt text-muted"></i>{" "}
+                  <i className="fa fa-heart text-muted"></i>
+                  <i className="fa fa-share-alt text-muted"></i>
                 </div>
               </div>
             </div>
