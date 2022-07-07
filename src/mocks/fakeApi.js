@@ -1,17 +1,28 @@
-import fotosdefault from '../img/fotosgeneriacas.png';
 
- const productos =[
-    {id:"p1",Name:"Nombre del modelo", description:"Ropa de primavera", price:40, pictureURL:fotosdefault},
-    {id:"p2",Name:"Nombre del modelo", description:"Ropa de verano", price:50, pictureURL:fotosdefault},
-    {id:"p3",Name:"Nombre del modelo",description:"Ropa de invierno", price:60, pictureURL:fotosdefault},
-    {id:"p4",Name:"Nombre del modelo",description:"Ropa de navidad", price:70, pictureURL:fotosdefault},
-    {id:"p5",Name:"Nombre del modelo", description:"Ropa de primavera", price:40, pictureURL:fotosdefault},
-    {id:"p6",Name:"Nombre del modelo", description:"Ropa de verano", price:50, pictureURL:fotosdefault},
-    {id:"p7",Name:"Nombre del modelo", description:"Ropa de invierno", price:60, pictureURL:fotosdefault},
-    {id:"p8",Name:"Nombre del modelo", description:"Ropa de navidad", price:70, pictureURL:fotosdefault},
+import ropa1 from '../img/1.jpeg';
+import ropa2 from '../img/2.jpeg';
+import ropa3 from '../img/3.jpeg';
+import ropa4 from '../img/4.jpeg';
+import ropa5 from '../img/5.jpeg';
+import ropa6 from '../img/6.jpeg';
+import ropa7 from '../img/7.jpeg';
+import ropa8 from '../img/8.jpeg';
+
+
+const productos =[
+{categoria:"Primavera",Name:"Ropa de primavera", description:"Ropa de primavera", price:40, pictureURL:ropa1, id:"1"},
+{categoria:"Verano",Name:"Ropa de verano", description:"Ropa de verano", price:50, pictureURL:ropa2, id:"2"},
+{categoria:"Invierno",Name:"Ropa de invierno",description:"Ropa de invierno", price:60, pictureURL:ropa3, id:"3"},
+{categoria:"Invierno",Name:"Ropa de invierno",description:"Ropa de invierno", price:70, pictureURL:ropa4, id:"4"},
+{categoria:"Primavera",Name:"Ropa de primavera", description:"Ropa de primavera", price:40, pictureURL:ropa5, id:"5"},
+{categoria:"Verano",Name:"Ropa de verano", description:"Ropa de verano", price:50, pictureURL:ropa6, id:"6"},
+{categoria:"Invierno",Name:"Ropa de invierno", description:"Ropa de invierno", price:60, pictureURL:ropa7, id:"7"},
+{categoria:"Otonio",Name:"Ropa de otonio", description:"Ropa de otonio", price:70, pictureURL:ropa8, id:"8"},
 ];
-export const getData = new Promise((res,rej)=>{
+
+export const getData = ()=>new Promise((res,rej)=>{
     let condition =true;
+    
     setTimeout(()=>{
         if(condition){
             res(productos);
