@@ -16,6 +16,9 @@ const ItemDeteailContainer = () => {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, [detalleId]);
+
+
+  
   return (
     <div className="bg-warning bg-opacity-25">
       {loading ? (
@@ -45,6 +48,7 @@ const ItemDeteailContainer = () => {
           price={data.price}
           pictureURL={data.pictureURL}
           id={data.id}
+          stock={data.stock}
         />
       )}
     </div>

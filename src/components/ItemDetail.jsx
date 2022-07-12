@@ -1,4 +1,20 @@
-export const ItemDetail = ({ name, price, pictureURL, id, description }) => {
+import { useState } from "react";
+import ItemCount from "./ItemCount";
+import { Link } from "react-router-dom";
+export const ItemDetail = ({
+  name,
+  price,
+  pictureURL,
+  id,
+  description,
+  stock,
+}) => {
+  const [status, setStatus] = useState(false);
+  const onAdd = () => {
+    setStatus(true);
+  };
+  console.log(status);
+
   return (
     <div className="container fluid pb-5">
       <div className="row d-flex justify-content-between bg-warning py-2">
@@ -7,25 +23,33 @@ export const ItemDetail = ({ name, price, pictureURL, id, description }) => {
             <div className="row">
               <div className="col-md-6">
                 <div className="text-center p-4">
-                  <img id="main-image" src={pictureURL} width="100%" />
+                  <img key={id} src={pictureURL} width="100%" />
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="product p-4">
-                  <h5 className="text-uppercase" key={id}>
-                    {name}
-                  </h5>
-                  <div className="price d-flex flex-row align-items-center">
-                    <span className="act-price">${price}</span>
+                <div className=" row 1 d-flex justify-content-center align-items-center">
+                  <div className="product p-4">
+                    <h5 className="text-uppercase" key={id}>
+                      {name}
+                    </h5>
+                    <div className="price d-flex flex-row align-items-center">
+                      <span className="act-price">${price}</span>
+                    </div>
                   </div>
-                </div>
-                <p className="about mx-3">{description}</p>
-                <div className="cart mt-4 align-items-center">
-                  <button className="btn btn-primary text-uppercase mr-2 px-4 mb-3">
-                    Detalle
-                  </button>
-                  <i className="fa fa-heart text-muted"></i>
-                  <i className="fa fa-share-alt text-muted"></i>
+                  <p className="about mx-3">{description}</p>
+                  <div className="cart mt-4 align-items-center ">
+                    {status ? (
+                      <Link to="/cart">
+                        <button className="btn btn-primary text-uppercase mr-2 px-4 mb-3">
+                          comprar
+                        </button>
+                      </Link>
+                    ) : (
+                      <ItemCount stock={stock} inicial={1} onAdd={onAdd} />
+                    )}
+                    <i className="fa fa-heart text-muted"></i>
+                    <i className="fa fa-share-alt text-muted"></i>
+                  </div>
                 </div>
               </div>
             </div>
