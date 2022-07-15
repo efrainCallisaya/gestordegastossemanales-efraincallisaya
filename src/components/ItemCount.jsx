@@ -3,9 +3,7 @@ import useCount from "./useCount";
 const ComponenetesII = ({ stock, inicial, onAdd }) => {
 
   const { funcionlogica, contador } = useCount(stock, inicial);
-  const accionOnAdd = () => {
-    onAdd();
-  };
+
   return (
     <div className="p-3">
       <div className="text-center">
@@ -28,7 +26,7 @@ const ComponenetesII = ({ stock, inicial, onAdd }) => {
           </button>
         </div>
         <div className="d-flex justify-content-center">
-        <button type="" className="btn btn-success m-1" onClick={accionOnAdd}>
+        <button type="" className="btn btn-success m-1" onClick={()=>onAdd(contador)}>
           agregar
         </button>
         </div>

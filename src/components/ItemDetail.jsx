@@ -9,8 +9,8 @@ export const ItemDetail = ({
   const [status, setStatus] = useState(false);
   const {addCartProducto} = useContext(CartContext);
 
-  const onAdd = (nan) => {
-    addCartProducto({...product, qty: nan});
+  const onAdd = (contador) => {
+    addCartProducto({...product, qty: contador});
     setStatus(true);
   };
   return (
