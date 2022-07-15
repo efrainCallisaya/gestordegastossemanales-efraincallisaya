@@ -1,8 +1,8 @@
 import useCount from "./useCount";
+
 const ComponenetesII = ({ stock, inicial, onAdd }) => {
+
   const { funcionlogica, contador } = useCount(stock, inicial);
-  console.log(stock, inicial);
-  console.log(contador);
   const accionOnAdd = () => {
     onAdd();
   };

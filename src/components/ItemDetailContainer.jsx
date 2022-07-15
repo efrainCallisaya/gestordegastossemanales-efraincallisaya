@@ -43,12 +43,7 @@ const ItemDeteailContainer = () => {
         </div>
       ) : (
         <ItemDetail
-          name={data.Name}
-          description={data.description}
-          price={data.price}
-          pictureURL={data.pictureURL}
-          id={data.id}
-          stock={data.stock}
+          product={data}
         />
       )}
     </div>

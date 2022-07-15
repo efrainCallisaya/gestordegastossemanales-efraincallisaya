@@ -1,20 +1,18 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import ItemCount from "./ItemCount";
 import { Link } from "react-router-dom";
+import {CartContext} from "../context/CartContext";
 export const ItemDetail = ({
-  name,
-  price,
-  pictureURL,
-  id,
-  description,
-  stock,
+  product
 }) => {
+
   const [status, setStatus] = useState(false);
-  const onAdd = () => {
+  const {addCartProducto} = useContext(CartContext);
+
+  const onAdd = (nan) => {
+    addCartProducto({...product, qty: nan});
     setStatus(true);
   };
-  console.log(status);
-
   return (
     <div className="container fluid pb-5">
       <div className="row d-flex justify-content-between bg-warning py-2">
@@ -23,20 +21,20 @@ export const ItemDetail = ({
             <div className="row">
               <div className="col-md-6">
                 <div className="text-center p-4">
-                  <img key={id} src={pictureURL} width="100%" />
+                  <img  src={product.pictureURL} width="100%"/>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className=" row 1 d-flex justify-content-center align-items-center">
                   <div className="product p-4">
-                    <h5 className="text-uppercase" key={id}>
-                      {name}
+                    <h5 className="text-uppercase" key={product.id}>
+                      {product.name}
                     </h5>
                     <div className="price d-flex flex-row align-items-center">
-                      <span className="act-price">${price}</span>
+                      <span className="act-price">${product.price}</span>
                     </div>
                   </div>
-                  <p className="about mx-3">{description}</p>
+                  <p className="about mx-3">{product.description}</p>
                   <div className="cart mt-4 align-items-center ">
                     {status ? (
                       <Link to="/cart">
@@ -45,7 +43,7 @@ export const ItemDetail = ({
                         </button>
                       </Link>
                     ) : (
-                      <ItemCount stock={stock} inicial={1} onAdd={onAdd} />
+                      <ItemCount stock={product.stock} inicial={1} onAdd={onAdd}/>
                     )}
                     <i className="fa fa-heart text-muted"></i>
                     <i className="fa fa-share-alt text-muted"></i>
