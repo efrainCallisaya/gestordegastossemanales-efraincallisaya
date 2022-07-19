@@ -20,7 +20,7 @@ const ItemDeteailContainer = () => {
 
   
   return (
-    <div className="bg-warning bg-opacity-25">
+    <div className="">
       {loading ? (
         <div className="container pt-4">
           <div

@@ -16,6 +16,7 @@ export const ItemDetail = ({
   return (
     <div className="container fluid pb-5">
       <div className="row d-flex justify-content-between bg-warning py-2">
+      
         <div className="col-md-10">
           <div className="card">
             <div className="row">

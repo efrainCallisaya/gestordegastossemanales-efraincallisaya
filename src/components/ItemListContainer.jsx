@@ -28,7 +28,7 @@ const ItemListComponent = ({ componentesI }) => {
   console.log(categoriaId);
   return (
     <>
-      <div className="bg-warning bg-opacity-25">
+      <div className="">
         {loading ? (
           <div>Cargando...</div>
         ) : (

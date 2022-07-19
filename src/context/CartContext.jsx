@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 
 export const CartContext = React.createContext();
 
+
 const CartProvider = ({ children }) => {
   const [productosCart, setProductosCart] = useState([]);
   const [qtyProductos, setQtyProductos] = useState(0);
+  console.log(productosCart);
+  
 
   useEffect(() => {
     getQtyCarProductos();
@@ -22,11 +25,26 @@ const CartProvider = ({ children }) => {
       setProductosCart([...productosCart, producto]); 
     }
   };
-  console.log(productosCart,qtyProductos);
+  const fullcartprice = () => {
+    productosCart.reduce((acc, cur) => {
+      return acc + cur.price * cur.qty;
+    }
+   , 0)
+  }
+  
+
+  const preciofinal  = () => {
+    setQtyProductos(productosCart.reduce((acc, cur) => {
+      return acc + cur.qty;
+    }
+   , 0));
+  }
+
 
   const deleteCartProducto = (id) => {
-    productosCart.filter((productoCart) => productoCart.id !== id);
+    setProductosCart(productosCart.filter((p) => p.id !== id));
   };
+
 
   const isInCart = (id) => {
     return productosCart.some((productoCar) => productoCar.id === id);
@@ -52,6 +70,7 @@ const CartProvider = ({ children }) => {
         getQtyCarProductos,
         qtyProductos,
         clearCart,
+        fullcartprice,
       }}
     >
       {children}
