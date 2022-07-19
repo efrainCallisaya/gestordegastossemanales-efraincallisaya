@@ -51,9 +51,7 @@ const Cart = () => {
           <h2> Total de compra </h2>
           <div className="price d-flex flex-row align-items-center">
             <h2 className="act-price">
-              {productosCart.reduce((acc, cur) => {
-                return acc + cur.price * cur.qty;
-              }, 0)}
+              {fullcartprice()}
             </h2>
           </div>
         </div>

@@ -7,6 +7,7 @@ const CartProvider = ({ children }) => {
   const [productosCart, setProductosCart] = useState([]);
   const [qtyProductos, setQtyProductos] = useState(0);
   console.log(productosCart);
+  console.log(qtyProductos);
   
 
   useEffect(() => {
@@ -25,22 +26,9 @@ const CartProvider = ({ children }) => {
       setProductosCart([...productosCart, producto]); 
     }
   };
-  const fullcartprice = () => {
-    productosCart.reduce((acc, cur) => {
-      return acc + cur.price * cur.qty;
-    }
-   , 0)
-  }
+  const fullcartprice = () => 
+    productosCart.reduce((acc, total) =>  acc + total.price * total.qty, 0)
   
-
-  const preciofinal  = () => {
-    setQtyProductos(productosCart.reduce((acc, cur) => {
-      return acc + cur.qty;
-    }
-   , 0));
-  }
-
-
   const deleteCartProducto = (id) => {
     setProductosCart(productosCart.filter((p) => p.id !== id));
   };
