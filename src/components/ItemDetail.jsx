@@ -22,7 +22,7 @@ export const ItemDetail = ({
             <div className="row">
               <div className="col-md-6">
                 <div className="text-center p-4">
-                  <img  src={product.pictureURL} width="100%"/>
+                  <img src={product.pictureURL} className="img-thumbnail" alt="..." width="100%"/>
                 </div>
               </div>
               <div className="col-md-6">

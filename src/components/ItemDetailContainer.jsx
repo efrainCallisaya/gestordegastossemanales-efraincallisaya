@@ -1,24 +1,26 @@
 import { useState, useEffect } from "react";
-import { getItem } from "../mocks/fakeDetail";
 import { ItemDetail } from "./ItemDetail";
 import { useParams } from "react-router-dom";
+import { getDoc, doc } from "firebase/firestore";
+import { EcommerBD } from "../firebase/firebase";
 
 const ItemDeteailContainer = () => {
   const [data, setData] = useState({});
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const { detalleId } = useParams();
 
   useEffect(() => {
-    getItem
-      .then((res) => setData(res.find((detalle) => detalle.id === detalleId)))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
+
+    
+    const productsColection = doc(EcommerBD, "productos", detalleId);
+    getDoc(productsColection).then((resultdetail) =>
+      setData({ id: resultdetail.id, ...resultdetail.data() })
+    );
+    setLoading(false);
   }, [detalleId]);
 
-
-  
   return (
     <div className="">
       {loading ? (
@@ -42,9 +44,7 @@ const ItemDeteailContainer = () => {
           </div>
         </div>
       ) : (
-        <ItemDetail
-          product={data}
-        />
+        <ItemDetail product={data} />
       )}
     </div>
   );

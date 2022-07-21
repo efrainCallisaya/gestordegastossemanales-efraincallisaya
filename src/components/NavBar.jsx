@@ -7,7 +7,7 @@ export default function NavBar() {
     <div className="container d-flex justify-content-around ">    
     <NavLink className="navbar-brand mx-5 fs-1" to="/">AtraPA2</NavLink> 
         <NavLink to="categoria/Primavera">
-            <button type="button" className="btn btn-outline-success py-1 border-0 fs-5">Primavera </button>
+            <button type="button" className="btn btn-outline-success py-1 border-0 fs-5">Primavera</button>
         </NavLink>
         <NavLink to="categoria/Verano">
             <button type="button" className="btn btn-outline-danger py-1 border-0 fs-5">Verano</button>

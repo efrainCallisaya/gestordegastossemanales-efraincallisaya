@@ -8,7 +8,8 @@ const ItemCart = ({ name, price, qty, key, pictureURL, id, eliminar}) => {
     <li className="list-group-item" key={key}>
     <div className="row">
       <div className="col-md-2">
-        <img key={key} src={pictureURL} width="100%" />
+        <img src={pictureURL} className="img-thumbnail" alt="..." width="100%"/>
+        
       </div>
       <div className="col-md-10">
         <div className="row">

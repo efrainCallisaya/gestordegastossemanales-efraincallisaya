@@ -1,7 +1,7 @@
-import { getData } from "../mocks/fakeApi";
 import { useState, useEffect } from "react";
 import { ItemList } from "./ItemList";
-
+import { EcommerBD } from "../firebase/firebase";
+import { getDocs, collection, query, where } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 
 const ItemListComponent = ({ componentesI }) => {
@@ -10,19 +10,44 @@ const ItemListComponent = ({ componentesI }) => {
   const { categoriaId } = useParams();
 
   useEffect(() => {
-    if (categoriaId) {
-      getData().then((res) =>
-        setproductList(
-          res.filter((product) => product.categoria === categoriaId)
-        )
+    const productsColection = collection(EcommerBD, "productos");
+    
+if (categoriaId) {
+      const filtercategoria = query(
+        productsColection,
+        where("categoria", "==", categoriaId)
       );
-      getData().catch((err) => console.log(err));
-      getData().finally(() => setLoading(false));
+      getDocs(filtercategoria)
+        .then((result) => {
+          const prcutosList = result.docs.map((doc) => {
+            return {
+              id: doc.id,
+              ...doc.data(),
+            };
+          });
+          setproductList(prcutosList);
+          console.log(prcutosList);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false));
     } else {
-      getData().then((res) => setproductList(res));
-      getData().catch((err) => console.log(err));
-      getData().finally(() => setLoading(false));
+      getDocs(productsColection)
+        .then((result) => {
+          const prcutosList = result.docs.map((doc) => {
+            return {
+              id: doc.id,
+              ...doc.data(),
+            };
+          });
+          setproductList(prcutosList);
+          console.log(prcutosList);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false));
     }
+
+
+    
   }, [categoriaId]);
 
   console.log(categoriaId);

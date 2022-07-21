@@ -29,5 +29,5 @@ export const getData = ()=>new Promise((res,rej)=>{
         }else{
             rej("Error");
         }
-    },2000);
+    },1000);
 })
