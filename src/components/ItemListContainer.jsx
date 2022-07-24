@@ -10,42 +10,23 @@ const ItemListComponent = ({ componentesI }) => {
   const { categoriaId } = useParams();
 
   useEffect(() => {
-    const productsColection = collection(EcommerBD, "productos");
-    
-if (categoriaId) {
-      const filtercategoria = query(
-        productsColection,
-        where("categoria", "==", categoriaId)
-      );
-      getDocs(filtercategoria)
-        .then((result) => {
-          const prcutosList = result.docs.map((doc) => {
-            return {
-              id: doc.id,
-              ...doc.data(),
-            };
-          });
-          setproductList(prcutosList);
-          console.log(prcutosList);
-        })
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false));
-    } else {
-      getDocs(productsColection)
-        .then((result) => {
-          const prcutosList = result.docs.map((doc) => {
-            return {
-              id: doc.id,
-              ...doc.data(),
-            };
-          });
-          setproductList(prcutosList);
-          console.log(prcutosList);
-        })
-        .catch((error) => console.log(error))
-        .finally(() => setLoading(false));
-    }
 
+    const getData = categoriaId ? query(collection(EcommerBD, 'productos'),where ('categoria', '==', categoriaId)) :collection(EcommerBD, 'productos');
+    
+      getDocs(getData)
+        .then((result) => {
+          const prcutosList = result.docs.map((doc) => {
+            return {
+              id: doc.id,
+              ...doc.data(),
+            };
+          });
+          setproductList(prcutosList);
+          console.log(prcutosList);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setLoading(false));
+    
 
     
   }, [categoriaId]);
