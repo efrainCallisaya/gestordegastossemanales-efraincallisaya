@@ -3,8 +3,6 @@
 
 import { Link } from "react-router-dom";
 
-
-
 export const Item = ({ name, description, price, pictureURL, id }) => {
   return (
     <div className="col mb-5">

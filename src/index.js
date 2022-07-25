@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 
-const root = ReactDOM.createRoot(document.getElementById('header'));
+const root = ReactDOM.createRoot(document.getElementById('body'));
 root.render(
   <React.StrictMode>
     <App />

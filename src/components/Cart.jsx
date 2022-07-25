@@ -2,6 +2,7 @@ import { useContext } from "react";
 import {Link} from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import ItemCart from "./ItemCart";
+import FormCart from "./FormCart";
 
 const Cart = () => {
   const {
@@ -24,9 +25,14 @@ const Cart = () => {
     deleteCartProducto(id);
   };
 
+  
+
+
+
+
   return (
     <>
-      <ul className="list-group list-group-numbered">
+      <ul className="list-group">
         {productosCart.map((item) => {
           return (
             <ItemCart
@@ -42,26 +48,40 @@ const Cart = () => {
           );
         })}
       </ul>
-      <div className="row d-flex justify-content-between bg-warning py-2">
-        <div>
-          <h2> total de productos </h2>
+      <div className="bg-warning py-3">
+        <div className="text-center">
+          <h2> Cantidad total de productos </h2>
           <h2> {qtyProductos} </h2>
         </div>
-        <div>
+        <div className="text-center">
           <h2> Total de compra </h2>
-          <div className="price d-flex flex-row align-items-center">
-            <h2 className="act-price">
+          <div className="price  flex-row text-center">
+            <h2 className="act-price ">
               {fullcartprice()}
             </h2>
           </div>
         </div>
       </div>
+      <div className=" d-flex justify-content-center  my-5">
+
       <button
-        className="btn btn-danger text-uppercase mr-2 px-4 mb-3 mx-1"
+        className="btn btn-danger text-uppercase  me-5"
         onClick={() => clearCart()}
-      >
+          >
         eliminar Carrito
       </button>
+        <Link to="/FormCart">
+        
+        <button
+        className="btn btn-success text-uppercase ms-5">
+        Finalizar compra
+        </button>
+        </Link>
+      
+
+
+      </div>
+      
     </>
   );
 };
