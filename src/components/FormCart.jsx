@@ -8,6 +8,8 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const FormCart = () => {
   const { fullcartprice, productosCart } = useContext(CartContext);
@@ -75,11 +77,14 @@ export const FormCart = () => {
       }).then((result) => {
         setIdVenta(result.id);
       });
+      console.log(idVenta);
 
       productosCart.forEach((product) => {
         const updateCollection = doc(EcommerBD, "productos", product.id);
         updateDoc(updateCollection, { stock: product.stock - product.qty });
       });
+      toast("Compra realizada con exito")
+      toast("su key de compra es: " + idVenta)
     }
   };
   const datosDeCompra = {
@@ -182,8 +187,10 @@ export const FormCart = () => {
                     className="ps-3 btn btn-primary mb-3"
                     onClick={(event) => enviarFormulario(event)}
                   >
+                    
                     Finalizar compra
                   </button>
+                  <ToastContainer/>
                 </div>
               </div>
             </div>
