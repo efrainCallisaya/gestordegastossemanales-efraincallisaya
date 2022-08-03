@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext,useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import { EcommerBD } from "../firebase/firebase";
 import {
@@ -8,11 +8,11 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const FormCart = () => {
-  const { fullcartprice, productosCart } = useContext(CartContext);
+  const { fullcartprice, productosCart,clearCart } = useContext(CartContext);
   //const EmailValid =/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
 
   const [Name, setName] = useState(null);
@@ -26,26 +26,26 @@ export const FormCart = () => {
   const [enviar, setEnviar] = useState(false);
 
   const valueTarjeta = (event) => {
-    event.preventDefault();
+    
     setTarjeta(event.target.value);
   };
   const valueCvv = (event) => {
-    event.preventDefault();
+   
     setCvv(event.target.value);
   };
 
   const valueDate = (event) => {
-    event.preventDefault();
+    
     setFecha(event.target.value);
   };
 
   const valuename = (event) => {
-    event.preventDefault();
+   
     setName(event.target.value);
   };
 
   const valueapellido = (event) => {
-    event.preventDefault();
+    
     setApellido(event.target.value);
   };
   const valueemail = (event) => {
@@ -53,7 +53,7 @@ export const FormCart = () => {
   };
 
   const valuecelular = (event) => {
-    event.preventDefault();
+    
     setcelular(event.target.value);
   };
   const enviarFormulario = () => {
@@ -78,16 +78,23 @@ export const FormCart = () => {
         setIdVenta(result.id);
       });
       console.log(idVenta);
+      console.log(enviar);
 
       productosCart.forEach((product) => {
         const updateCollection = doc(EcommerBD, "productos", product.id);
         updateDoc(updateCollection, { stock: product.stock - product.qty });
+
+
       });
-      toast("Compra realizada con exito")
-      toast("su key de compra es: " + idVenta)
+      toast("Compra realizada con exito");
+      toast("su key de compra es: " + idVenta);
+      clearCart();
+    } else {
+      toast("Por favor complete todos los campos");
     }
   };
-  const datosDeCompra = {
+  const datosDeCompra = 
+  {
     Name,
     apellido,
     email,
@@ -96,6 +103,9 @@ export const FormCart = () => {
     celular,
     Fecha,
   };
+
+  
+
 
   return (
     <>
@@ -187,10 +197,9 @@ export const FormCart = () => {
                     className="ps-3 btn btn-primary mb-3"
                     onClick={(event) => enviarFormulario(event)}
                   >
-                    
                     Finalizar compra
                   </button>
-                  <ToastContainer/>
+                  <ToastContainer />
                 </div>
               </div>
             </div>

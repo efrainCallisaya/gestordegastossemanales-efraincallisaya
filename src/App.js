@@ -7,7 +7,8 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import Cart from './components/Cart.jsx'
 import {FormCart} from './components/FormCart.jsx'
 import CartProvider from './context/CartContext';
-
+import Registrate from './components/Registrate.jsx';
+import Inicio from './components/Inicio.jsx';
 
 
 
@@ -22,6 +23,8 @@ function App() {
                 <Route path="/detalle/:detalleId" element={  <ItemDetailContainer/>} />
                 <Route path="/cart" element={<Cart/>} />
                 <Route path="/FormCart" element={<FormCart/>} />
+                <Route path="/registrate" element={<Registrate/>} />
+                <Route path="/inicio" element={<Inicio/>} />
             </Routes>
           </CartProvider>
          
