@@ -7,4 +7,4 @@ Tienda Web donde podras comprar producto 'ropa' de niños
 - React.js
 - Firebase
 
-- link de la pagina en produccion (https://incredible-monstera-c0231e.netlify.app)
+- link de la pagina en produccion (https://silly-biscochitos-ef062e.netlify.app/)
