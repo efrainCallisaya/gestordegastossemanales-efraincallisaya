@@ -1,5 +1,5 @@
 # *Atrapados*
-Tienda Web donde podras comprar producto 'ropa' de niños
+*Tienda Web donde podras comprar producto 'ropa' de niños*
 
 #   *Tecnologias utilizadas*
 - *Js,*
