@@ -21,8 +21,7 @@ export default function NavBar() {
                     <NavLink to="cart">
                         <CardWidget />
                 </NavLink>
-                        <NavLink className="btn btn-primary me-5 fs-5" to="/inicio" >Inicio</NavLink>
-                        <NavLink className="btn btn-success me-5 fs-5" to="/registrate" >Registrate</NavLink>
+                        
             </div>
         </nav>
   )
