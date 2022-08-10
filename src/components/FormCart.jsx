@@ -1,6 +1,7 @@
-import { useState, useContext,useEffect } from "react";
+import { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { EcommerBD } from "../firebase/firebase";
+import { Link } from "react-router-dom";
 import {
   collection,
   addDoc,
@@ -12,12 +13,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const FormCart = () => {
-  const { fullcartprice, productosCart,clearCart } = useContext(CartContext);
+  const { fullcartprice, productosCart, clearCart } = useContext(CartContext);
   //const EmailValid =/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i
 
   const [Name, setName] = useState(null);
   const [apellido, setApellido] = useState(null);
-  const [email, setEmail] = useState(null, false);
+  const [email, setEmail] = useState(null);
   const [celular, setcelular] = useState(null);
   const [Fecha, setFecha] = useState(null);
   const [tarjeta, setTarjeta] = useState(null);
@@ -25,37 +26,19 @@ export const FormCart = () => {
   const [idVenta, setIdVenta] = useState("");
   const [enviar, setEnviar] = useState(false);
 
-  const valueTarjeta = (event) => {
-    
-    setTarjeta(event.target.value);
-  };
-  const valueCvv = (event) => {
-   
-    setCvv(event.target.value);
-  };
-
-  const valueDate = (event) => {
-    
-    setFecha(event.target.value);
-  };
-
-  const valuename = (event) => {
-   
-    setName(event.target.value);
+  const clearformulario = () => {
+    if (enviar === true) {
+      setName(null);
+      setApellido(null);
+      setEmail(null);
+      setcelular(null);
+      setFecha(null);
+      setTarjeta(null);
+      setCvv(null);
+      setEnviar(false);
+    }
   };
 
-  const valueapellido = (event) => {
-    
-    setApellido(event.target.value);
-  };
-  const valueemail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const valuecelular = (event) => {
-    
-    setcelular(event.target.value);
-  };
   const enviarFormulario = () => {
     if (
       Name != null &&
@@ -64,37 +47,33 @@ export const FormCart = () => {
       tarjeta != null &&
       cvv != null &&
       celular != null &&
-      Fecha != null
+      Fecha != null &&
+      idVenta != null
     ) {
       setEnviar(true);
       const ColectionVentas = collection(EcommerBD, "ventas");
-      console.log(ColectionVentas);
+
       addDoc(ColectionVentas, {
         Datos: datosDeCompra,
         productos: productosCart,
         total: fullcartprice(),
         date: serverTimestamp(),
       }).then((result) => {
+        clearCart();
         setIdVenta(result.id);
+        toast("Compra se realizo con exito");
+        clearformulario();
       });
-      console.log(idVenta);
-      console.log(enviar);
 
       productosCart.forEach((product) => {
         const updateCollection = doc(EcommerBD, "productos", product.id);
         updateDoc(updateCollection, { stock: product.stock - product.qty });
-
-
       });
-      toast("Compra realizada con exito");
-      toast("su key de compra es: " + idVenta);
-      clearCart();
     } else {
       toast("Por favor complete todos los campos");
     }
   };
-  const datosDeCompra = 
-  {
+  const datosDeCompra = {
     Name,
     apellido,
     email,
@@ -104,15 +83,16 @@ export const FormCart = () => {
     Fecha,
   };
 
-  
-
-
   return (
     <>
       <div className="container">
         <div className="container p-3">
           <div className="card px-4">
-            <p className="h8 py-3">Ingrese datos de compra</p>
+            <h3 className="h8 py-3">Ingrese datos de compra</h3>
+            <p>
+              Recuerde que los campos con "
+              <span className="text-danger">*</span>" son obligatorios
+            </p>
             <div className="row gx-3">
               <div className="col-12">
                 <div className="d-flex flex-column">
@@ -121,7 +101,7 @@ export const FormCart = () => {
                     className=" mb-3"
                     type="text"
                     placeholder="Nombre"
-                    onChange={(event) => valuename(event)}
+                    onChange={(event) => setName(event.target.value)}
                   />
                 </div>
               </div>
@@ -132,7 +112,7 @@ export const FormCart = () => {
                     className=" mb-3"
                     type="text"
                     placeholder="Apellido"
-                    onChange={(event) => valueapellido(event)}
+                    onChange={(event) => setApellido(event.target.value)}
                   />
                 </div>
               </div>
@@ -141,66 +121,91 @@ export const FormCart = () => {
                   <p className="text mb-1">Celular</p>
                   <input
                     className=" mb-3"
-                    type="text"
+                    type="number"
                     placeholder="Celular"
-                    onChange={(event) => valuecelular(event)}
+                    onChange={(event) => setcelular(event.target.value)}
                   />
                 </div>
               </div>
               <div className="col-12">
                 <div className="d-flex flex-column">
-                  <p className="text mb-1">Email</p>
+                  <p className="text mb-1">
+                    Email<span className="text-danger">*</span>
+                  </p>
                   <input
                     className=" mb-3"
                     type="text"
                     placeholder="Email"
-                    onChange={(event) => valueemail(event)}
+                    onChange={(event) => setEmail(event.target.value)}
                   />
                 </div>
               </div>
 
               <div className="col-12">
                 <div className="d-flex flex-column">
-                  <p className="text mb-1">Numero de tarjeta</p>
+                  <p className="text mb-1">
+                    Numero de tarjeta<span className="text-danger">*</span>
+                  </p>
                   <input
                     className=" mb-3"
-                    type="text"
-                    onChange={(event) => valueTarjeta(event)}
+                    type="number"
+                    maxLength="16"
+                    onChange={(event) => setTarjeta(event.target.value)}
                   />
                 </div>
               </div>
               <div className="col-6">
                 <div className="d-flex flex-column">
-                  <p className="text mb-1">Fecha de vencimiento</p>
+                  <p className="text mb-1">
+                    Fecha de vencimiento<span className="text-danger">*</span>
+                  </p>
                   <input
                     className=" mb-3"
-                    type="text"
-                    placeholder="MM/YYYY"
-                    onChange={(event) => valueDate(event)}
+                    type="number"
+                    placeholder="MM/YY"
+                    maxLength="5"
+                    onChange={(event) => setFecha(event.target.value)}
                   />
                 </div>
               </div>
               <div className="col-6">
                 <div className="d-flex flex-column">
-                  <p className="text mb-1">CVV/CVC</p>
+                  <p className="text mb-1">
+                    Ingrese CVV<span className="text-danger">*</span>
+                  </p>
                   <input
-                    className=" mb-3 pt-2 "
-                    type="password"
+                    className=" mb-3"
+                    type="number"
                     placeholder="***"
-                    onChange={(event) => valueCvv(event)}
+                    maxLength="5"
+                    onChange={(event) => setCvv(event.target.value)}
                   />
                 </div>
               </div>
-              <div className="col-12">
+              <div className="col-12 ">
                 <div>
-                  <button
-                    className="ps-3 btn btn-primary mb-3"
-                    onClick={(event) => enviarFormulario(event)}
-                  >
-                    Finalizar compra
-                  </button>
+                  
+                  {enviar ? (
+                      <Link to="/" className="ps-3 btn btn-primary mb-3">Volver a Home</Link>
+                  ) : (
+                    <button
+                      className="ps-3 btn btn-success mb-3"
+                      onClick={(event) => enviarFormulario(event)}
+                    >
+                      Finalizar compra
+                    </button>
+                  )}
+                  </div>
+                  <div>
+                  {idVenta ? (
+                    <div className="d-flex flex-column">
+                      <h5>Su ID de compra es :</h5>
+                      <p>{idVenta}</p>
+                    </div>
+                  ) : null}
+                  </div>
                   <ToastContainer />
-                </div>
+                
               </div>
             </div>
           </div>
